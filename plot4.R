@@ -9,11 +9,13 @@ download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_p
 #Unzip and read in the power data
 power <- read.table(unz("power.zip", "household_power_consumption.txt"),sep=";",header=T,as.is=T)
 
+
 #convert date 
-power$date_time=strptime(paste(power$Date,power$Time),format="%Y-%m-%d %H:%M:%S")
+power$date_time=strptime(paste(power$Date,power$Time),format="%d/%m/%Y %H:%M:%S")
 
 #filter for 2 required dates
-power1=power[as.Date(power$date_time) == as.Date('2007-02-01') | as.Date(power$date_time) == as.Date('2007-02-02')]
+power1=power[as.Date(power$date_time) == as.Date('2007-02-01') | as.Date(power$date_time) == as.Date('2007-02-02'),]
+
 
 png(paste(work_dir,"plot4.png",sep=""))
 par(mfrow=c(2,2))
